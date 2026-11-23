@@ -53,7 +53,15 @@ export interface Product {
 
 export interface Person {
   readonly name: string;
-  readonly role: string;
+  /** Leadership title used across the site. */
+  readonly title: string;
+  /** Short form for compact places, e.g. "CEO". */
+  readonly shortTitle: string;
+  /** Statutory position on each company's board (as filed with MCA). */
+  readonly boardRole: string;
+  readonly education: string;
+  /** Professional bio paragraphs. Facts supplied by the founders only. */
+  readonly bio: readonly string[];
 }
 
 export interface ContactRoute {
@@ -70,6 +78,8 @@ export const siteConfig = {
   domain: "bigonbuy.com",
   productionUrl: "https://www.bigonbuy.com",
   tagline: "We build and run direct-to-consumer businesses.",
+  /** The group's one-line positioning, used on About. */
+  positioning: "Engineering discipline, applied to commerce.",
   description:
     "BIGONBUY is the corporate home of BIGONBUY Trading Private Limited, which owns the Megaska fashion brand, and BIGONBUY Technologies Private Limited, which owns LoopD2C and Chatji.",
   brand: {
@@ -160,8 +170,28 @@ export const siteConfig = {
   ],
 
   founders: [
-    { name: "Sandeep Damodaran", role: "Co-founder and Director" },
-    { name: "Varun Dixit", role: "Co-founder and Director" },
+    {
+      name: "Sandeep Damodaran",
+      title: "Co-founder and Chief Executive Officer",
+      shortTitle: "CEO",
+      boardRole: "Director",
+      education: "Electrical engineering",
+      bio: [
+        "Sandeep spent more than two decades in the Middle East, the last ten years as a project manager in the oil and gas sector, a sector where projects succeed or fail on planning and accountability.",
+        "At BIGONBUY he sets the group’s direction and leads its technology work, including the products built by BIGONBUY Technologies.",
+      ],
+    },
+    {
+      name: "Varun Dixit",
+      title: "Co-founder and Managing Director",
+      shortTitle: "Managing Director",
+      boardRole: "Director",
+      education: "Production engineering; MBA",
+      bio: [
+        "Varun is a production engineer with an MBA. He worked alongside Sandeep in the oil and gas sector as a planning engineer, responsible for planning, scheduling and forecasting on large projects.",
+        "At BIGONBUY he leads planning, forecasting and operations across both companies.",
+      ],
+    },
   ],
 
   // One shared inbox for every route; the subject line tells requests apart.
@@ -201,6 +231,7 @@ export const siteConfig = {
   domain: string;
   productionUrl: string;
   tagline: string;
+  positioning: string;
   description: string;
   country: string;
   jurisdictionCity: string;

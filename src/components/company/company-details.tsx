@@ -18,7 +18,7 @@ export function CompanyDetails({
   return (
     <article
       aria-labelledby={headingId}
-      className="flex h-full flex-col rounded-[var(--radius-large)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-[var(--shadow-subtle)] sm:p-8"
+      className="flex h-full flex-col rounded-[var(--radius-large)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 sm:p-8"
     >
       <Text as={headingLevel} role="h3" id={headingId}>{company.legalName}</Text>
       <Text className="mt-2 text-[var(--color-foreground-muted)]">{company.summary}</Text>
