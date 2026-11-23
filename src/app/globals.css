@@ -1,0 +1,293 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+
+  /* Shared with loopdesk-website (LoopD2C) so the group reads as one family.
+   This site uses the brand colours sparingly: ink, hairlines and white space first. */
+  --color-canvas: #f7f8fc;
+  --color-canvas-subtle: #eef0f8;
+  --color-surface: #ffffff;
+  --color-surface-raised: #ffffff;
+  --color-surface-inverse: #070b34;
+  --color-foreground: #0b1033;
+  --color-foreground-muted: #4a5072;
+  --color-foreground-subtle: #626890;
+  --color-foreground-inverse: #f7f8fc;
+  --color-border: #dcdfec;
+  --color-border-strong: #b4b9d0;
+  --color-brand: #5236f0;
+  --color-brand-hover: #4024d6;
+  --color-brand-soft: #ece9ff;
+  --color-accent: #07707b;
+  --color-accent-soft: #ddf8f5;
+  --color-success: #18794e;
+  --color-warning: #a15c00;
+  --color-danger: #c0343d;
+  --color-info: #1769aa;
+  --color-focus-ring: #7b4dff;
+  /* One warm accent, used sparingly: loop knots, hand-drawn underlines, the pricing stamp.
+     The bright marigold is decorative only; text uses the ink variant (5.9:1 on white). */
+  --color-marigold: #f2a900;
+  --color-marigold-ink: #8a5a00;
+  /* Brand gradient: the bright version for strokes and fills, the deep version for
+     gradient text (large text only; each stop keeps 3:1 or better on light surfaces). */
+  --gradient-brand: linear-gradient(90deg, #16e7d2 0%, #4f8bff 50%, #7b4dff 100%);
+  --gradient-brand-text: linear-gradient(90deg, #0b8a98 0%, #3d5bf0 50%, #6a3cf5 100%);
+
+  --font-family-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-family-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --text-display: clamp(3rem, 7vw, 6.5rem);
+  --text-h1: clamp(2.5rem, 4.4vw, 4.25rem);
+  --text-h2: clamp(2rem, 3.6vw, 3.5rem);
+  --text-h3: clamp(1.375rem, 2vw, 2rem);
+  --text-body-large: clamp(1.125rem, 1.4vw, 1.25rem);
+  --text-body: 1rem;
+  --text-body-small: 0.875rem;
+  --text-label: 0.8125rem;
+  --text-caption: 0.75rem;
+  --leading-display: 0.95;
+  --leading-heading: 1.08;
+  --leading-body: 1.65;
+  --leading-label: 1.3;
+  --leading-caption: 1.45;
+  --tracking-display: -0.055em;
+  --tracking-heading: -0.035em;
+  --tracking-label: 0.06em;
+
+  --page-gutter: clamp(1rem, 4vw, 2.5rem);
+  --content-reading: 46rem;
+  --content-standard: 72rem;
+  --content-wide: 90rem;
+  --header-height: 4.5rem;
+  /* Vertical rhythm. One scale for every page: compact for index/utility bands, standard for
+     content sections, spacious for closing CTA bands, editorial for the About story chapters.
+     Heroes sit right under the sticky header with a balanced top and bottom above the torn edge. */
+  --section-compact: clamp(2.5rem, 5vw, 4rem);
+  --section-standard: clamp(3rem, 7vw, 6rem);
+  --section-spacious: clamp(3rem, 7vw, 6.5rem);
+  --section-editorial: clamp(5rem, 9.5vw, 8.5rem);
+  --section-hero-top: clamp(2.5rem, 5vw, 4.5rem);
+  --section-hero-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  /* The first section after a hero: the torn edge already separates them, so it needs less top. */
+  --section-after-hero: clamp(3rem, 5vw, 4.5rem);
+  /* Two adjacent sections on the same surface read as one band: the second one's top padding
+     shrinks to this, so the gap between them is one section's padding, not two. */
+  --section-joined: clamp(0.5rem, 1.5vw, 1.5rem);
+  /* Footer: top padding after a light page end, top padding under a hairline when it continues
+     a dark closing band, and a short bottom under the legal bar. */
+  --footer-top: clamp(3rem, 6vw, 5rem);
+  --footer-top-joined: clamp(2.5rem, 4vw, 3.5rem);
+  --footer-bottom: clamp(1.5rem, 3vw, 2.5rem);
+
+  --radius-small: 0.375rem;
+  --radius-medium: 0.625rem;
+  --radius-large: 1rem;
+  --radius-panel: 1.25rem;
+  --radius-pill: 999px;
+  --border-width: 1px;
+
+  --shadow-subtle: 0 1px 2px rgb(7 11 52 / 0.06), 0 8px 24px rgb(7 11 52 / 0.04);
+  --shadow-raised: 0 16px 40px rgb(7 11 52 / 0.09), 0 2px 8px rgb(7 11 52 / 0.05);
+  --shadow-floating: 0 28px 70px rgb(7 11 52 / 0.16), 0 8px 20px rgb(7 11 52 / 0.08);
+
+  --duration-fast: 140ms;
+  --duration-standard: 220ms;
+  --duration-slow: 360ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --easing-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+[data-theme="inverse"] {
+  color-scheme: dark;
+  color: var(--color-foreground);
+  --color-canvas: #070b34;
+  --color-canvas-subtle: #0c1245;
+  --color-surface: #121a55;
+  --color-surface-raised: #1a2366;
+  --color-surface-inverse: #070b34;
+  --color-foreground: #f7f8fc;
+  --color-foreground-muted: #c3c8ec;
+  --color-foreground-subtle: #9399c9;
+  --color-foreground-inverse: #f7f8fc;
+  --color-border: #2a3378;
+  --color-border-strong: #4a549a;
+  --color-brand: #8c7bff;
+  --color-brand-hover: #a194ff;
+  --color-brand-soft: #2a2870;
+  --color-accent: #3fe0cf;
+  --color-accent-soft: #10404a;
+  --color-focus-ring: #a194ff;
+  --color-marigold-ink: #f2b630;
+  --gradient-brand-text: linear-gradient(90deg, #3fe0cf 0%, #7fa6ff 50%, #a58bff 100%);
+}
+
+@theme inline {
+  --color-background: var(--color-canvas);
+  --color-foreground: var(--color-foreground);
+  --font-sans: var(--font-family-sans);
+  --font-mono: var(--font-family-mono);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 20rem;
+  scroll-padding-top: calc(var(--header-height) + 1rem);
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+}
+
+#main-content {
+  scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-canvas);
+  color: var(--color-foreground);
+  font-family: var(--font-family-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+}
+
+/* In the base layer so margin utilities (mt-*, mb-*) on text win over this reset. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p {
+    margin-block: 0;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+}
+
+/* In the base layer so text-* utilities (e.g. white text on brand buttons) win over it. */
+@layer base {
+  a {
+    color: inherit;
+    text-underline-offset: 0.18em;
+  }
+}
+
+.button-inverse {
+  color: var(--color-surface-inverse);
+}
+
+[data-theme="inverse"] .button-inverse:hover {
+  color: var(--color-foreground-inverse);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img,
+picture,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+@layer base {
+  ul,
+  ol {
+    margin-block: 0;
+  }
+}
+
+::selection {
+  background: var(--color-brand-soft);
+  color: var(--color-foreground);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus-ring);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* A thin brand-gradient rule: the one signature detail carried over from LoopD2C. */
+.bg-brand-gradient {
+  background-image: var(--gradient-brand);
+}
+
+@media (forced-colors: active) {
+  .bg-brand-gradient {
+    background: CanvasText;
+  }
+}
+
+/* Adjacent sections on the same surface read as one band. */
+[data-surface="default"] + [data-surface="default"],
+[data-surface="subtle"] + [data-surface="subtle"] {
+  padding-top: var(--section-joined);
+}
+
+/* Long-form text (legal pages). */
+.prose-content > * + * {
+  margin-top: 1rem;
+}
+
+.prose-content h3 {
+  margin-top: 1.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-foreground);
+}
+
+.prose-content ul {
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+
+.prose-content li + li {
+  margin-top: 0.375rem;
+}
+
+.prose-content a {
+  color: var(--color-brand);
+  text-decoration: underline;
+}
