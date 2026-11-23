@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteFooter, SiteHeader, SkipLink } from "@/components/site-shell";
-import { siteConfig } from "@/config/site";
+import { getWebsiteOperator, siteConfig } from "@/config/site";
 import { robotsDirective } from "@/lib/metadata";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
@@ -16,6 +16,8 @@ export const metadata: Metadata = {
   title: { default: defaultTitle, template: `%s | ${siteConfig.groupName}` },
   description: siteConfig.description,
   applicationName: siteConfig.groupName,
+  creator: getWebsiteOperator().legalName,
+  publisher: getWebsiteOperator().legalName,
   formatDetection: { telephone: false, email: false, address: false },
   robots: robotsDirective(),
   openGraph: {

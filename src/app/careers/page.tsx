@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { PageHeader } from "@/components/content/page-header";
 import { Container, Section, Text } from "@/components/foundation";
-import { getContact, siteConfig } from "@/config/site";
+import { getContact, siteConfig, mailtoHref } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
   path: "/careers",
   title: "Careers",
-  description: `Working at ${siteConfig.groupName}: write to the careers team about roles across LoopD2C, Chatji and Megaska.`,
+  description: `Working at ${siteConfig.groupName}: write to us about roles across LoopD2C, Chatji and Megaska.`,
 });
 
 export default function CareersPage() {
@@ -29,14 +29,17 @@ export default function CareersPage() {
               CV, portfolio or code. We reply when there is a fit.
             </Text>
             <a
-              href={`mailto:${careers.email}`}
+              href={mailtoHref(careers)}
               className="mt-6 inline-flex min-h-11 items-center rounded-[var(--radius-medium)] border border-[var(--color-brand)] bg-[var(--color-brand)] px-5 text-sm font-semibold text-[var(--color-foreground-inverse)] no-underline hover:bg-[var(--color-brand-hover)]"
             >
-              {careers.email}
+              Email {careers.email}
             </a>
+            <Text role="body-small" className="mt-3 text-[var(--color-foreground-subtle)]">
+              Please use the subject line “{careers.subject}”.
+            </Text>
             <Text role="body-small" className="mt-6 text-[var(--color-foreground-subtle)]">
               {siteConfig.groupName} never asks candidates for payment at any stage of hiring. If someone does, please report it to{" "}
-              <a href={`mailto:${getContact("legal").email}`} className="underline">{getContact("legal").email}</a>.
+              <a href={mailtoHref(getContact("legal"))} className="underline">{getContact("legal").email}</a>.
             </Text>
           </div>
         </Container>

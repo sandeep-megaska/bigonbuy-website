@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ExternalLink } from "@/components/content/external-link";
 import { PageHeader } from "@/components/content/page-header";
 import { Container, Section, Text } from "@/components/foundation";
-import { companies, products, siteConfig } from "@/config/site";
+import { companies, products, siteConfig, CONTACT_EMAIL, mailtoHref } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
@@ -19,19 +19,24 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title="Contact the group"
-        lead="For company matters, write to the right inbox below. If you are a customer of one of our products, please use that product’s support so your request reaches the right team."
+        lead="For company matters, write to us at the address below. If you are a customer of one of our products, please use that product’s support so your request reaches the right team."
       />
 
       <Section spacing="standard" aria-labelledby="group-contact-heading">
         <Container width="standard">
           <Text as="h2" role="h2" id="group-contact-heading">Company enquiries</Text>
+          <Text className="mt-3 max-w-[var(--content-reading)] text-[var(--color-foreground-muted)]">
+            Write to{" "}
+            <a href={`mailto:${CONTACT_EMAIL}`} className="font-semibold text-[var(--color-brand)] underline">{CONTACT_EMAIL}</a>
+            . Choosing a topic below opens your email app with the subject filled in, so your message reaches the right person faster.
+          </Text>
           <ul className="mt-8 grid list-none gap-5 p-0 sm:grid-cols-2">
             {groupRoutes.map((route) => (
-              <li key={route.id} className="rounded-[var(--radius-large)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
+              <li key={route.id} className="flex flex-col rounded-[var(--radius-large)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6">
                 <Text as="h3" role="body-large" className="font-semibold">{route.label}</Text>
-                <Text className="mt-1 text-[var(--color-foreground-muted)]">{route.description}</Text>
-                <a href={`mailto:${route.email}`} className="mt-4 inline-flex min-h-11 items-center font-medium text-[var(--color-brand)] underline">
-                  {route.email}
+                <Text className="mt-1 flex-1 text-[var(--color-foreground-muted)]">{route.description}</Text>
+                <a href={mailtoHref(route)} className="mt-4 inline-flex min-h-11 items-center font-medium text-[var(--color-brand)] underline">
+                  Email about {route.label.toLowerCase()}
                 </a>
               </li>
             ))}
@@ -43,7 +48,7 @@ export default function ContactPage() {
         <Container width="standard">
           <Text as="h2" role="h2" id="support-heading">Product support</Text>
           <Text className="mt-3 max-w-[var(--content-reading)] text-[var(--color-foreground-muted)]">
-            Orders, accounts, billing and app questions are handled by each product. The group inboxes above cannot
+            Orders, accounts, billing and app questions are handled by each product. The address above cannot
             look up orders or change accounts.
           </Text>
           <ul className="mt-8 grid list-none gap-5 p-0 md:grid-cols-3">

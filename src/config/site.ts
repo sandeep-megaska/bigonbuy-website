@@ -7,6 +7,9 @@
  * testimonials, logos, ratings, funding or partnerships. No GSTIN or phone number unless provided.
  */
 
+/** The group's single public mailbox (to be set up on the bigonbuy.com domain). */
+export const CONTACT_EMAIL = "contact@bigonbuy.com";
+
 export type CompanyId = "technologies" | "trading";
 export type ProductId = "loopd2c" | "chatji" | "megaska";
 
@@ -58,6 +61,8 @@ export interface ContactRoute {
   readonly label: string;
   readonly description: string;
   readonly email: string;
+  /** Pre-filled subject so one shared inbox can be sorted by topic. */
+  readonly subject: string;
 }
 
 export const siteConfig = {
@@ -73,6 +78,8 @@ export const siteConfig = {
   },
   country: "India",
   jurisdictionCity: "Jaipur, Rajasthan",
+  /** The company that develops and operates bigonbuy.com (named in the privacy policy and terms). */
+  websiteOperatorId: "technologies",
 
   companies: [
     {
@@ -157,31 +164,35 @@ export const siteConfig = {
     { name: "Varun Dixit", role: "Co-founder and Director" },
   ],
 
-  // TODO(owner): confirm each mailbox exists before launch.
+  // One shared inbox for every route; the subject line tells requests apart.
   contacts: [
     {
       id: "partners",
       label: "Partnerships and business",
       description: "Partners, platforms, banks and payment providers.",
-      email: "hello@bigonbuy.com",
+      email: CONTACT_EMAIL,
+      subject: "Partnership enquiry",
     },
     {
       id: "legal",
       label: "Legal and compliance",
       description: "Verification requests, notices, privacy and grievances.",
-      email: "legal@bigonbuy.com",
+      email: CONTACT_EMAIL,
+      subject: "Legal and compliance",
     },
     {
       id: "press",
       label: "Press",
       description: "Media enquiries about the group or its founders.",
-      email: "hello@bigonbuy.com",
+      email: CONTACT_EMAIL,
+      subject: "Press enquiry",
     },
     {
       id: "careers",
       label: "Careers",
       description: "Applications and questions about working with us.",
-      email: "careers@bigonbuy.com",
+      email: CONTACT_EMAIL,
+      subject: "Careers",
     },
   ],
 } as const satisfies {
@@ -193,6 +204,7 @@ export const siteConfig = {
   description: string;
   country: string;
   jurisdictionCity: string;
+  websiteOperatorId: CompanyId;
   companies: readonly Company[];
   products: readonly Product[];
   founders: readonly Person[];
@@ -233,3 +245,12 @@ export const legalNavigation = [
   { href: "/legal/privacy", label: "Privacy Policy" },
   { href: "/legal/terms", label: "Terms of Use" },
 ] as const;
+
+export function mailtoHref(route: ContactRoute): string {
+  return `mailto:${route.email}?subject=${encodeURIComponent(route.subject)}`;
+}
+
+/** The company that develops and operates this website. */
+export function getWebsiteOperator(): Company {
+  return getCompany(siteConfig.websiteOperatorId);
+}
