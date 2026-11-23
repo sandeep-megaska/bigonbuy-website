@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalDocument, type LegalSection } from "@/components/legal/legal-document";
-import { getCompany, getContact, siteConfig } from "@/config/site";
+import { getContact, getWebsiteOperator, siteConfig, mailtoHref } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 
 export const metadata: Metadata = createPageMetadata({
@@ -11,7 +11,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function TermsPage() {
-  const operator = getCompany("technologies");
+  const operator = getWebsiteOperator();
   const legal = getContact("legal");
 
   const sections: LegalSection[] = [
@@ -88,7 +88,7 @@ export default function TermsPage() {
       title: "Changes and contact",
       content: (
         <p>
-          We may update these terms and will post the new version here. Questions: <a href={`mailto:${legal.email}`}>{legal.email}</a>.
+          We may update these terms and will post the new version here. Questions: <a href={mailtoHref(legal)}>{legal.email}</a>.
           See also our <Link href="/legal/privacy">Privacy Policy</Link>.
         </p>
       ),

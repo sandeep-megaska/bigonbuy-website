@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container, Text } from "@/components/foundation";
-import { companies, legalNavigation, primaryNavigation, siteConfig } from "@/config/site";
+import { companies, getWebsiteOperator, legalNavigation, primaryNavigation, siteConfig } from "@/config/site";
 import { Wordmark } from "./wordmark";
 
 export function SiteFooter() {
@@ -63,7 +63,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 border-t border-[var(--color-border)] pt-6 text-sm text-[var(--color-foreground-muted)] sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} {siteConfig.groupName}. Registered in {siteConfig.country}.</p>
+          <p>© {year} {getWebsiteOperator().legalName}. Website operated by {getWebsiteOperator().shortName}.</p>
           <ul className="flex list-none flex-wrap gap-x-5 p-0">
             {legalNavigation.map((item) => (
               <li key={item.href}>
