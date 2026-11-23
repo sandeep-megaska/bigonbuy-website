@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { CompanyDetails } from "@/components/company/company-details";
 import { PageHeader } from "@/components/content/page-header";
 import { Container, Section, Text } from "@/components/foundation";
-import { companies, getCompanyBySlug, getContact, siteConfig } from "@/config/site";
+import { companies, getCompanyBySlug, getContact, siteConfig, mailtoHref } from "@/config/site";
 import { createPageMetadata } from "@/lib/metadata";
 import { jsonLd, organizationSchema } from "@/lib/structured-data";
 
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return createPageMetadata({
     path: `/companies/${company.slug}`,
     title: company.legalName,
-    description: `Registered details of ${company.legalName}${cin}: registered office, founders and the products it operates.`,
+    description: `Registered details of ${company.legalName}${cin}: incorporation, registered office, owners, and the brands and domains it owns.`,
   });
 }
 
@@ -66,7 +66,7 @@ export default async function CompanyPage({ params }: Props) {
             <Text as="h2" role="h3">Verification requests</Text>
             <Text className="mt-4 text-[var(--color-foreground-muted)]">
               Banks, payment providers and platforms can request supporting documents for {company.legalName} by
-              writing to <a href={`mailto:${legal.email}`} className="font-medium text-[var(--color-brand)] underline">{legal.email}</a>.
+              writing to <a href={mailtoHref(legal)} className="font-medium text-[var(--color-brand)] underline">{legal.email}</a>.
               Company records can also be checked independently on the Ministry of Corporate Affairs portal.
             </Text>
             <a

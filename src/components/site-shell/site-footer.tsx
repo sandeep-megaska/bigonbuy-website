@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container, Text } from "@/components/foundation";
-import { companies, legalNavigation, primaryNavigation, siteConfig } from "@/config/site";
+import { companies, getWebsiteOperator, legalNavigation, primaryNavigation, siteConfig } from "@/config/site";
 import { Wordmark } from "./wordmark";
 
 export function SiteFooter() {
@@ -8,8 +8,8 @@ export function SiteFooter() {
 
   return (
     <footer data-theme="inverse" className="bg-[var(--color-surface-inverse)] text-[var(--color-foreground-inverse)]">
-      <Container width="wide" className="pt-[var(--footer-top)] pb-[var(--footer-bottom)]">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+      <Container width="wide" className="site-footer-inner">
+        <div className="site-footer-body grid gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <div className="grid gap-6">
             <Wordmark inverse />
             <ul className="grid list-none gap-5 p-0 sm:grid-cols-2">
@@ -63,7 +63,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-10 flex flex-col gap-3 border-t border-[var(--color-border)] pt-6 text-sm text-[var(--color-foreground-muted)] sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} {siteConfig.groupName}. Registered in {siteConfig.country}.</p>
+          <p>© {year} {getWebsiteOperator().legalName}. Website operated by {getWebsiteOperator().shortName}.</p>
           <ul className="flex list-none flex-wrap gap-x-5 p-0">
             {legalNavigation.map((item) => (
               <li key={item.href}>
