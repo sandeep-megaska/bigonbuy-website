@@ -28,12 +28,12 @@ export default function HomePage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(structuredData)} />
 
-      <Section spacing="editorial" data-surface="sheet" className="bg-[var(--color-surface)]" aria-labelledby="home-heading">
+      <Section spacing="hero" data-surface="sheet" className="!pb-[var(--section-home-hero-bottom)] bg-[var(--color-surface)]" aria-labelledby="home-heading">
         <Container width="standard">
           <span aria-hidden="true" className="brand-rule" />
           <h1
             id="home-heading"
-            className="mt-8 max-w-[15ch] text-[length:clamp(2.75rem,6.4vw,5.5rem)] font-semibold leading-[1] tracking-[-0.045em]"
+            className="mt-6 max-w-[15ch] text-[length:clamp(2.75rem,6.4vw,5.5rem)] font-semibold leading-[1] tracking-[-0.045em]"
           >
             {siteConfig.tagline}
           </h1>
