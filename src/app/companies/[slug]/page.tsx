@@ -49,17 +49,17 @@ export default async function CompanyPage({ params }: Props) {
       <Section spacing="standard" theme="subtle" aria-labelledby="people-heading">
         <Container width="standard" className="grid gap-10 md:grid-cols-2">
           <div>
-            <Text as="h2" role="h3" id="people-heading">Founders and directors</Text>
+            <Text as="h2" role="h3" id="people-heading">Directors</Text>
             <ul className="mt-4 grid list-none gap-3 p-0">
               {siteConfig.founders.map((person) => (
                 <li key={person.name}>
                   <span className="font-semibold">{person.name}</span>
-                  <span className="text-[var(--color-foreground-muted)]"> · {person.role}</span>
+                  <span className="text-[var(--color-foreground-muted)]"> · {person.boardRole}, {person.title}</span>
                 </li>
               ))}
             </ul>
-            <Link href="/about" className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--color-brand)] underline">
-              About the founders
+            <Link href="/about#leadership" className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-[var(--color-brand)] underline">
+              Leadership
             </Link>
           </div>
           <div>
