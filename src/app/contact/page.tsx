@@ -65,7 +65,7 @@ export default function ContactPage() {
         </Container>
       </Section>
 
-      <Section spacing="compact" aria-labelledby="registered-heading">
+      <Section spacing="standard" aria-labelledby="registered-heading">
         <Container width="standard">
           <Text as="h2" role="h3" id="registered-heading">Registered offices</Text>
           <ul className="mt-4 grid list-none gap-4 p-0 text-sm sm:grid-cols-2">

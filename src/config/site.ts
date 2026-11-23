@@ -60,6 +60,11 @@ export interface Person {
   /** Statutory position on each company's board (as filed with MCA). */
   readonly boardRole: string;
   readonly education: string;
+  /**
+   * Headshot in public/people/ (portrait, at least 800x1000, same background and light for both).
+   * null until supplied; the profile renders without a photo.
+   */
+  readonly photo: string | null;
   /** Professional bio paragraphs. Facts supplied by the founders only. */
   readonly bio: readonly string[];
 }
@@ -176,6 +181,7 @@ export const siteConfig = {
       shortTitle: "CEO",
       boardRole: "Director",
       education: "Electrical engineering",
+      photo: null,
       bio: [
         "Sandeep spent more than two decades in the Middle East, the last ten years as a project manager in the oil and gas sector, a sector where projects succeed or fail on planning and accountability.",
         "At BIGONBUY he sets the group’s direction and leads its technology work, including the products built by BIGONBUY Technologies.",
@@ -187,6 +193,7 @@ export const siteConfig = {
       shortTitle: "Director, Operations & Finance",
       boardRole: "Director",
       education: "Production engineering; MBA",
+      photo: null,
       bio: [
         "Varun is a production engineer with an MBA. He worked alongside Sandeep in the oil and gas sector as a planning engineer, responsible for planning, scheduling and forecasting on large projects.",
         "At BIGONBUY he leads operations and finance across both companies, including planning and forecasting.",

@@ -61,8 +61,9 @@
   --section-standard: clamp(3rem, 7vw, 6rem);
   --section-spacious: clamp(3rem, 7vw, 6.5rem);
   --section-editorial: clamp(5rem, 9.5vw, 8.5rem);
-  --section-hero-top: clamp(2.5rem, 5vw, 4.5rem);
-  --section-hero-bottom: clamp(2.5rem, 4vw, 3.5rem);
+  /* Subpage heroes: symmetric and a step above body sections, so each page opens with air. */
+  --section-hero-top: clamp(3.5rem, 7vw, 6.5rem);
+  --section-hero-bottom: clamp(3.5rem, 7vw, 6.5rem);
   /* The first section after a hero: the torn edge already separates them, so it needs less top. */
   --section-after-hero: clamp(3rem, 5vw, 4.5rem);
   /* Two adjacent sections on the same surface read as one band: the second one's top padding
@@ -72,7 +73,7 @@
      a dark closing band, and a short bottom under the legal bar. */
   --footer-top: clamp(3rem, 6vw, 5rem);
   --footer-top-joined: clamp(2.5rem, 4vw, 3.5rem);
-  --footer-bottom: clamp(1.5rem, 3vw, 2.5rem);
+  --footer-bottom: clamp(2rem, 3vw, 2.5rem);
 
   --radius-small: 0.375rem;
   --radius-medium: 0.625rem;
@@ -201,13 +202,16 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
-img,
-picture,
-svg,
-video,
-canvas {
-  display: block;
-  max-width: 100%;
+/* In the base layer so sizing utilities (max-w-*, inline) on media win over this reset. */
+@layer base {
+  img,
+  picture,
+  svg,
+  video,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
 }
 
 @layer base {
@@ -292,7 +296,8 @@ canvas {
    a hairline divides them instead of a second full padding. */
 .site-footer-inner {
   padding-top: var(--footer-top);
-  padding-bottom: var(--footer-bottom);
+  /* Keep the legal bar clear of the iPhone home indicator. */
+  padding-bottom: calc(var(--footer-bottom) + env(safe-area-inset-bottom));
 }
 
 body:has(main [data-closing][data-theme="inverse"]) .site-footer-inner {
