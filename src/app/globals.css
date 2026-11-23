@@ -61,9 +61,12 @@
   --section-standard: clamp(3rem, 7vw, 6rem);
   --section-spacious: clamp(3rem, 7vw, 6.5rem);
   --section-editorial: clamp(5rem, 9.5vw, 8.5rem);
-  /* Subpage heroes: symmetric and a step above body sections, so each page opens with air. */
-  --section-hero-top: clamp(3.5rem, 7vw, 6.5rem);
-  --section-hero-bottom: clamp(3.5rem, 7vw, 6.5rem);
+  /* Heroes sit right under the sticky header, which already separates them from the top of the
+     screen: a modest top, and a fuller bottom so the hero doesn't run into the first section. */
+  --section-hero-top: clamp(2.5rem, 4.5vw, 4rem);
+  --section-hero-bottom: clamp(3rem, 6vw, 5rem);
+  /* The home hero carries the large headline, so it gets a little more below. */
+  --section-home-hero-bottom: clamp(3.5rem, 7vw, 6rem);
   /* The first section after a hero: the torn edge already separates them, so it needs less top. */
   --section-after-hero: clamp(3rem, 5vw, 4.5rem);
   /* Two adjacent sections on the same surface read as one band: the second one's top padding
