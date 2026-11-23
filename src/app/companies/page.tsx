@@ -8,7 +8,7 @@ import { createPageMetadata } from "@/lib/metadata";
 export const metadata: Metadata = createPageMetadata({
   path: "/companies",
   title: "Companies",
-  description: `Legal names, Corporate Identification Numbers and registered offices of the ${siteConfig.groupName} companies, and the products each one runs.`,
+  description: `Legal names, Corporate Identification Numbers and registered offices of the ${siteConfig.groupName} companies, and the brands each one owns.`,
 });
 
 export default function CompaniesPage() {
@@ -16,8 +16,8 @@ export default function CompaniesPage() {
     <>
       <PageHeader
         eyebrow="Companies"
-        title="Legal entities"
-        lead={`The ${siteConfig.groupName} group consists of ${companies.length} private limited companies registered in ${siteConfig.country}. Each one is listed below with its registered details and the products it operates.`}
+        title="Our companies"
+        lead={`${siteConfig.groupName} consists of ${companies.length} private limited companies registered in ${siteConfig.country}, both owned by their founders. Details below are as held by the Registrar of Companies.`}
       />
       <Section spacing="standard" aria-label="Company details">
         <Container width="standard" className="grid gap-6">

@@ -3,37 +3,31 @@
 :root {
   color-scheme: light;
 
-  /* Shared with loopdesk-website (LoopD2C) so the group reads as one family.
-   This site uses the brand colours sparingly: ink, hairlines and white space first. */
-  --color-canvas: #f7f8fc;
-  --color-canvas-subtle: #eef0f8;
+  /* Token names and scale are shared with loopdesk-website (LoopD2C) so the group's sites stay
+     consistent. Colours come from the bigONbuy logo: near-black ink and logo red, used sparingly.
+     --color-brand is the text-safe red (6:1 on white); --color-logo-red is the logo's own red. */
+  --color-canvas: #fafafa;
+  --color-canvas-subtle: #f3f3f4;
   --color-surface: #ffffff;
   --color-surface-raised: #ffffff;
-  --color-surface-inverse: #070b34;
-  --color-foreground: #0b1033;
-  --color-foreground-muted: #4a5072;
-  --color-foreground-subtle: #626890;
-  --color-foreground-inverse: #f7f8fc;
-  --color-border: #dcdfec;
-  --color-border-strong: #b4b9d0;
-  --color-brand: #5236f0;
-  --color-brand-hover: #4024d6;
-  --color-brand-soft: #ece9ff;
-  --color-accent: #07707b;
-  --color-accent-soft: #ddf8f5;
+  --color-surface-inverse: #0f0f11;
+  --color-foreground: #0f0f11;
+  --color-foreground-muted: #46474d;
+  --color-foreground-subtle: #63656c;
+  --color-foreground-inverse: #fafafa;
+  --color-border: #e4e4e7;
+  --color-border-strong: #c4c5ca;
+  --color-brand: #c20500;
+  --color-brand-hover: #9e0400;
+  --color-brand-soft: #fdeceb;
+  --color-accent: #c20500;
+  --color-accent-soft: #fdeceb;
   --color-success: #18794e;
   --color-warning: #a15c00;
   --color-danger: #c0343d;
   --color-info: #1769aa;
-  --color-focus-ring: #7b4dff;
-  /* One warm accent, used sparingly: loop knots, hand-drawn underlines, the pricing stamp.
-     The bright marigold is decorative only; text uses the ink variant (5.9:1 on white). */
-  --color-marigold: #f2a900;
-  --color-marigold-ink: #8a5a00;
-  /* Brand gradient: the bright version for strokes and fills, the deep version for
-     gradient text (large text only; each stop keeps 3:1 or better on light surfaces). */
-  --gradient-brand: linear-gradient(90deg, #16e7d2 0%, #4f8bff 50%, #7b4dff 100%);
-  --gradient-brand-text: linear-gradient(90deg, #0b8a98 0%, #3d5bf0 50%, #6a3cf5 100%);
+  --color-focus-ring: #c20500;
+  --color-logo-red: #e10600;
 
   --font-family-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-family-mono: var(--font-geist-mono), ui-monospace, monospace;
@@ -100,25 +94,23 @@
 [data-theme="inverse"] {
   color-scheme: dark;
   color: var(--color-foreground);
-  --color-canvas: #070b34;
-  --color-canvas-subtle: #0c1245;
-  --color-surface: #121a55;
-  --color-surface-raised: #1a2366;
-  --color-surface-inverse: #070b34;
-  --color-foreground: #f7f8fc;
-  --color-foreground-muted: #c3c8ec;
-  --color-foreground-subtle: #9399c9;
-  --color-foreground-inverse: #f7f8fc;
-  --color-border: #2a3378;
-  --color-border-strong: #4a549a;
-  --color-brand: #8c7bff;
-  --color-brand-hover: #a194ff;
-  --color-brand-soft: #2a2870;
-  --color-accent: #3fe0cf;
-  --color-accent-soft: #10404a;
-  --color-focus-ring: #a194ff;
-  --color-marigold-ink: #f2b630;
-  --gradient-brand-text: linear-gradient(90deg, #3fe0cf 0%, #7fa6ff 50%, #a58bff 100%);
+  --color-canvas: #0f0f11;
+  --color-canvas-subtle: #17171a;
+  --color-surface: #1c1c20;
+  --color-surface-raised: #242429;
+  --color-surface-inverse: #0f0f11;
+  --color-foreground: #fafafa;
+  --color-foreground-muted: #c9c9cf;
+  --color-foreground-subtle: #a1a2aa;
+  --color-foreground-inverse: #fafafa;
+  --color-border: #2e2e34;
+  --color-border-strong: #4a4a52;
+  --color-brand: #ff6b63;
+  --color-brand-hover: #ff8c86;
+  --color-brand-soft: #3a1513;
+  --color-accent: #ff6b63;
+  --color-accent-soft: #3a1513;
+  --color-focus-ring: #ff6b63;
 }
 
 @theme inline {
@@ -249,13 +241,17 @@ canvas {
   }
 }
 
-/* A thin brand-gradient rule: the one signature detail carried over from LoopD2C. */
-.bg-brand-gradient {
-  background-image: var(--gradient-brand);
+/* A short logo-red rule used as a section marker. */
+.brand-rule {
+  display: block;
+  width: 2.5rem;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--color-logo-red);
 }
 
 @media (forced-colors: active) {
-  .bg-brand-gradient {
+  .brand-rule {
     background: CanvasText;
   }
 }
@@ -290,4 +286,20 @@ canvas {
 .prose-content a {
   color: var(--color-brand);
   text-decoration: underline;
+}
+
+/* Footer rhythm. When a page closes on a dark band, band and footer read as one surface:
+   a hairline divides them instead of a second full padding. */
+.site-footer-inner {
+  padding-top: var(--footer-top);
+  padding-bottom: var(--footer-bottom);
+}
+
+body:has(main [data-closing][data-theme="inverse"]) .site-footer-inner {
+  padding-top: 0;
+}
+
+body:has(main [data-closing][data-theme="inverse"]) .site-footer-body {
+  border-top: var(--border-width) solid var(--color-border);
+  padding-top: var(--footer-top-joined);
 }

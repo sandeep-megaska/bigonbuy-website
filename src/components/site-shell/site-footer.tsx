@@ -8,8 +8,8 @@ export function SiteFooter() {
 
   return (
     <footer data-theme="inverse" className="bg-[var(--color-surface-inverse)] text-[var(--color-foreground-inverse)]">
-      <Container width="wide" className="pt-[var(--footer-top)] pb-[var(--footer-bottom)]">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
+      <Container width="wide" className="site-footer-inner">
+        <div className="site-footer-body grid gap-10 lg:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)]">
           <div className="grid gap-6">
             <Wordmark inverse />
             <ul className="grid list-none gap-5 p-0 sm:grid-cols-2">

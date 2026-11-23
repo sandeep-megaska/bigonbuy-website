@@ -9,7 +9,7 @@ import "./globals.css";
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
 
-const defaultTitle = `${siteConfig.groupName} | Company information`;
+const defaultTitle = `${siteConfig.groupName} | ${siteConfig.tagline}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#f7f8fc",
+  themeColor: "#fafafa",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return createPageMetadata({
     path: `/companies/${company.slug}`,
     title: company.legalName,
-    description: `Registered details of ${company.legalName}${cin}: registered office, founders and the products it operates.`,
+    description: `Registered details of ${company.legalName}${cin}: incorporation, registered office, owners, and the brands and domains it owns.`,
   });
 }
 
