@@ -183,13 +183,13 @@ export const siteConfig = {
     },
     {
       name: "Varun Dixit",
-      title: "Co-founder and Managing Director",
-      shortTitle: "Managing Director",
+      title: "Co-founder and Director, Operations & Finance",
+      shortTitle: "Director, Operations & Finance",
       boardRole: "Director",
       education: "Production engineering; MBA",
       bio: [
         "Varun is a production engineer with an MBA. He worked alongside Sandeep in the oil and gas sector as a planning engineer, responsible for planning, scheduling and forecasting on large projects.",
-        "At BIGONBUY he leads planning, forecasting and operations across both companies.",
+        "At BIGONBUY he leads operations and finance across both companies, including planning and forecasting.",
       ],
     },
   ],
