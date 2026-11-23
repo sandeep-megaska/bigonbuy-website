@@ -18,7 +18,7 @@ export function ProductCard({ product }: Readonly<{ product: Product }>) {
         <p className="font-medium text-[var(--color-brand)]">
           {product.domain} <span aria-hidden="true">↗</span>
         </p>
-        <p className="text-[var(--color-foreground-subtle)]">Operated by {company.legalName}</p>
+        <p className="text-[var(--color-foreground-subtle)]">Owned by {company.legalName}</p>
       </div>
     </article>
   );

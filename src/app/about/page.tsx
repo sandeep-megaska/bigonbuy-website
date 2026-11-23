@@ -12,12 +12,15 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 export default function AboutPage() {
+  const trading = getCompany("trading");
+  const technologies = getCompany("technologies");
+
   return (
     <>
       <PageHeader
         eyebrow="About"
         title="We ran a brand, then built the tools to run it."
-        lead="BIGONBUY started as the team behind Megaska, a direct-to-consumer fashion brand on Shopify."
+        lead="BIGONBUY started with Megaska, a direct-to-consumer swimwear and apparel brand on Shopify. The software we wrote to run it became LoopD2C and Chatji."
       />
 
       <Section spacing="standard" aria-labelledby="story-heading">
@@ -29,15 +32,28 @@ export default function AboutPage() {
               cash-on-delivery orders, exchanges and returns, and a steady stream of customer messages on WhatsApp.
             </Text>
             <Text>
-              We built our own tools to handle that work. Those tools became two products: LoopD2C, a Shopify
-              app for the journey after “Add to bag”, and Chatji, a WhatsApp AI chatbot and business messaging product.
+              We built our own tools for that work. They became two products: LoopD2C, a Shopify app for the journey
+              after “Add to bag”, and Chatji, a WhatsApp AI chatbot and business messaging product.
             </Text>
             <Text>
-              Today the brand and the software sit in separate companies. {getCompany("trading").legalName} operates Megaska,
-              and {getCompany("technologies").legalName} builds and operates LoopD2C and Chatji.{" "}
-              <Link href="/companies" className="font-medium text-[var(--color-brand)] underline">See company details</Link>.
+              The brand and the software now sit in separate companies, both owned by the founders.
             </Text>
           </Stack>
+
+          <Text as="h3" role="h3" className="mt-12">Timeline</Text>
+          <ol className="mt-6 grid list-none gap-0 border-l-2 border-[var(--color-border)] p-0">
+            {[trading, technologies].map((company) => (
+              <li key={company.id} className="relative pb-8 pl-6 last:pb-0">
+                <span aria-hidden="true" className="absolute -left-[0.4375rem] top-1.5 size-3 rounded-full bg-[var(--color-logo-red)]" />
+                <p className="text-sm font-semibold text-[var(--color-brand)]">{company.incorporatedOn}</p>
+                <p className="mt-1 font-semibold">{company.legalName} incorporated</p>
+                <p className="mt-1 text-[var(--color-foreground-muted)]">{company.summary}</p>
+              </li>
+            ))}
+          </ol>
+          <Link href="/companies" className="mt-8 inline-flex min-h-11 items-center font-medium text-[var(--color-brand)] underline">
+            See registered details
+          </Link>
         </Container>
       </Section>
 
@@ -45,7 +61,7 @@ export default function AboutPage() {
         <Container width="standard">
           <Text as="h2" role="h2" id="founders-heading">Founders</Text>
           <Text className="mt-3 max-w-[var(--content-reading)] text-[var(--color-foreground-muted)]">
-            Both founders are co-founders and directors of both companies.
+            Sandeep and Varun founded both companies, own them, and serve as directors of each.
           </Text>
           <ul className="mt-8 grid list-none gap-5 p-0 sm:grid-cols-2">
             {siteConfig.founders.map((person) => (

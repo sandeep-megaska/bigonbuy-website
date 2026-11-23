@@ -4,8 +4,8 @@ import { Text } from "@/components/foundation";
 import { getProductsFor, type Company } from "@/config/site";
 
 /**
- * The verification block for one legal entity: legal name, CIN, registered office and the
- * products it runs. Rows with unconfirmed values (null) are omitted, never filled with placeholders.
+ * The registered-details block for one legal entity: legal name, CIN, incorporation, registered
+ * office, owners, and the brands and domains it owns. Rows with unconfirmed values (null) are omitted, never filled with placeholders.
  */
 export function CompanyDetails({
   company,
@@ -31,18 +31,24 @@ export function CompanyDetails({
           </DetailRow>
         ) : null}
         <DetailRow term="Entity type">{company.entityType}, {company.country}</DetailRow>
+        {company.incorporatedOn ? <DetailRow term="Date of incorporation">{company.incorporatedOn}</DetailRow> : null}
         {company.registeredOffice ? (
           <DetailRow term="Registered office">
             <address className="not-italic">{company.registeredOffice}</address>
           </DetailRow>
         ) : null}
-        <DetailRow term={companyProducts.length === 1 ? "Business operated" : "Products operated"}>
-          <ul className="grid list-none gap-1 p-0">
+        {company.ownedBy.length > 0 ? (
+          <DetailRow term="Owned by">{company.ownedBy.join(" and ")} (founders)</DetailRow>
+        ) : null}
+        <DetailRow term="Brands and domains owned">
+          <ul className="grid list-none gap-2 p-0">
             {companyProducts.map((product) => (
               <li key={product.id}>
-                <span className="font-semibold">{product.name}</span>
-                <span className="text-[var(--color-foreground-muted)]"> · {product.category} · </span>
-                <ExternalLink href={product.url}>{product.domain}</ExternalLink>
+                <span className="font-semibold text-[var(--color-foreground)]">{product.name}</span>
+                <span> · {product.category}</span>
+                <span className="block">
+                  {product.ownership} · <ExternalLink href={product.url}>{product.domain}</ExternalLink>
+                </span>
               </li>
             ))}
           </ul>

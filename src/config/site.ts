@@ -18,9 +18,14 @@ export interface Company {
   readonly legalName: string;
   readonly shortName: string;
   readonly cin: string | null;
+  /** Exactly as held in the Registrar of Companies record (MCA). Update only after MCA is updated. */
   readonly registeredOffice: string | null;
   readonly country: string;
   readonly entityType: string;
+  /** As stated on the Certificate of Incorporation. */
+  readonly incorporatedOn: string | null;
+  /** Shareholders, by name. */
+  readonly ownedBy: readonly string[];
   /** One sentence on what the entity does, without claims. */
   readonly summary: string;
   readonly productIds: readonly ProductId[];
@@ -33,6 +38,8 @@ export interface Product {
   readonly url: string;
   readonly domain: string;
   readonly category: string;
+  /** What the owning company holds: the brand, the domain, or both. */
+  readonly ownership: string;
   readonly description: string;
   /** A short, verifiable status line (no metrics). */
   readonly status: string;
@@ -57,9 +64,13 @@ export const siteConfig = {
   groupName: "BIGONBUY",
   domain: "bigonbuy.com",
   productionUrl: "https://www.bigonbuy.com",
-  tagline: "The company behind LoopD2C, Chatji and Megaska.",
+  tagline: "We build and run direct-to-consumer businesses.",
   description:
-    "BIGONBUY is a group of two Indian private limited companies that run LoopD2C, Chatji and Megaska. This site lists the legal entities, their registered details, founders and contact routes.",
+    "BIGONBUY is the corporate home of BIGONBUY Trading Private Limited, which owns the Megaska fashion brand, and BIGONBUY Technologies Private Limited, which owns LoopD2C and Chatji.",
+  brand: {
+    logoPath: "/brand/bigonbuy-logo.svg",
+    logoInversePath: "/brand/bigonbuy-logo-inverse.svg",
+  },
   country: "India",
   jurisdictionCity: "Jaipur, Rajasthan",
 
@@ -73,8 +84,10 @@ export const siteConfig = {
       registeredOffice:
         "P.No 3, Mahadev Nagar, Nandpuri Market, Shyam Nagar, Jaipur, Rajasthan 302019, India",
       country: "India",
-      entityType: "Private limited company",
-      summary: "Builds and operates software for direct-to-consumer brands.",
+      entityType: "Private company limited by shares",
+      incorporatedOn: "30 October 2026",
+      ownedBy: ["Sandeep Damodaran", "Varun Dixit"],
+      summary: "Builds and runs software for direct-to-consumer brands: LoopD2C and Chatji.",
       productIds: ["loopd2c", "chatji"],
     },
     {
@@ -82,12 +95,15 @@ export const siteConfig = {
       slug: "bigonbuy-trading",
       legalName: "BIGONBUY Trading Private Limited",
       shortName: "BIGONBUY Trading",
-      // TODO(owner): add the CIN and registered office before this site is used for verification.
-      cin: null,
-      registeredOffice: null,
+      cin: "U74999RJ2021PTC074459",
+      // As held by the Registrar of Companies. The founders intend this to match the Technologies
+      // address; change it here only once the correction is filed and reflected on MCA.
+      registeredOffice: "Plot No. 3 Mahadev Nagar, Nandpuri Market, Jaipur, Rajasthan 302006, India",
       country: "India",
-      entityType: "Private limited company",
-      summary: "Owns and operates the Megaska direct-to-consumer fashion brand.",
+      entityType: "Private company limited by shares",
+      incorporatedOn: "8 April 2021",
+      ownedBy: ["Sandeep Damodaran", "Varun Dixit"],
+      summary: "Owns and runs Megaska, a direct-to-consumer swimwear and apparel brand.",
       productIds: ["megaska"],
     },
   ],
@@ -100,6 +116,7 @@ export const siteConfig = {
       url: "https://www.loopd2c.com",
       domain: "loopd2c.com",
       category: "Shopify app",
+      ownership: "Product and the loopd2c.com domain",
       description:
         "A Shopify app for the commerce journey after “Add to bag”: OTP checkout login, prepaid offers and cash-on-delivery rules, exchanges and returns, reviews, and WhatsApp updates.",
       status: "Listed on the Shopify App Store",
@@ -114,6 +131,7 @@ export const siteConfig = {
       url: "https://chatji.ai",
       domain: "chatji.ai",
       category: "WhatsApp business messaging",
+      ownership: "Product and the chatji.ai domain",
       description: "An AI chatbot and business messaging product for WhatsApp.",
       status: "Product site at chatji.ai",
       supportUrl: "https://chatji.ai",
@@ -126,6 +144,7 @@ export const siteConfig = {
       url: "https://megaska.com",
       domain: "megaska.com",
       category: "D2C fashion brand",
+      ownership: "Megaska brand and the megaska.com domain",
       description: "A direct-to-consumer swimwear and apparel brand, sold through its own Shopify store.",
       status: "Live Shopify store",
       supportUrl: "https://megaska.com",
@@ -167,6 +186,7 @@ export const siteConfig = {
   ],
 } as const satisfies {
   groupName: string;
+  brand: { logoPath: string; logoInversePath: string };
   domain: string;
   productionUrl: string;
   tagline: string;
